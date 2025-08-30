@@ -23,7 +23,7 @@ body {
 }
 a { text-decoration: none; color: inherit; cursor: pointer; }
 section { padding: 40px 20px; }
-h1,h2,h3,h4,h5,h6,p,small { margin: 10px 0; }
+h1,h2,h3,h4,h5,h6,p,small { margin: 10px 0; line-height: 1.6; }
 
 /* ===========================
    Header (Hamburger)
@@ -35,6 +35,7 @@ header {
   background: #fff;
   border-bottom: 1px solid #DDD;
   padding: 15px 20px;
+  z-index: 1000;
 }
 header h2 { margin:0; font-size: 18px; }
 .menu-toggle { font-size: 28px; cursor: pointer; }
@@ -53,10 +54,23 @@ header h2 { margin:0; font-size: 18px; }
   box-sizing: border-box; 
   overflow-y: auto; 
   transition: transform 0.3s ease;
+  z-index: 999;
 }
 .sidebar h2 { font-size: 18px; margin-top: 0; }
 .sidebar a { display: block; padding: 12px 0; font-weight: 500; transition: 0.2s; }
 .sidebar a:hover { color: #304ACA; }
+
+/* ===========================
+   Overlay
+=========================== */
+#overlay {
+  display: none;
+  position: fixed;
+  top:0; left:0;
+  width:100%; height:100%;
+  background: rgba(0,0,0,0.4);
+  z-index: 998;
+}
 
 /* ===========================
    Main content
@@ -75,7 +89,7 @@ h6 { font-size: 17px; font-weight:700; }
 p { font-size:16px; font-weight:400; }
 small { font-size:15px; font-weight:400; }
 .extra-small { font-size:14px; font-weight:400; }
-.section-description { margin-bottom: 20px; font-size: 14px; color: #555; line-height: 1.6; }
+.section-description { margin-bottom: 20px; font-size: 14px; color: #555; }
 
 /* ===========================
    Color palette
@@ -96,7 +110,7 @@ small { font-size:15px; font-weight:400; }
   font-family: 'Estedad', sans-serif;
   color: #fff;
   position: absolute;
-  right: -50px;
+  right: -60px;
   top: 50%;
   transform: translateY(-50%);
   opacity: 0;
@@ -167,10 +181,9 @@ small { font-size:15px; font-weight:400; }
   header { display: flex; }
   .sidebar { 
     transform: translateX(100%); 
-    width: 200px;
+    width: 220px;
     top: 0;
     height: 100%;
-    z-index: 999;
   }
   .sidebar.open { transform: translateX(0); }
   .main { margin-right: 0; padding: 20px; }
@@ -184,13 +197,16 @@ small { font-size:15px; font-weight:400; }
   <span class="material-icons menu-toggle" onclick="toggleMenu()">menu</span>
 </header>
 
+<!-- Overlay -->
+<div id="overlay" onclick="toggleMenu()"></div>
+
 <!-- Sidebar -->
 <div class="sidebar" id="sidebar">
   <h2>دیزاین سیستم دانشجویار</h2>
-  <a href="#colors">رنگ‌ها</a>
-  <a href="#buttons">دکمه‌ها</a>
-  <a href="#inputs">فرم‌ها</a>
-  <a href="#typography">تایپوگرافی</a>
+  <a href="#colors" onclick="toggleMenu()">رنگ‌ها</a>
+  <a href="#buttons" onclick="toggleMenu()">دکمه‌ها</a>
+  <a href="#inputs" onclick="toggleMenu()">فرم‌ها</a>
+  <a href="#typography" onclick="toggleMenu()">تایپوگرافی</a>
 </div>
 
 <!-- Main content -->
@@ -200,7 +216,9 @@ small { font-size:15px; font-weight:400; }
 <section id="colors">
   <h1>پالت رنگ</h1>
   <p class="section-description">
-    رنگ‌ها به سه دسته اصلی تقسیم می‌شوند: <strong>Main</strong> (رنگ‌های برند)، <strong>Complementary</strong> (رنگ‌های مکمل)، و <strong>Neutral</strong> (رنگ‌های خنثی). این رنگ‌ها در کل پروژه استفاده خواهند شد.
+    رنگ‌ها به سه دسته اصلی تقسیم می‌شوند: <strong>Main</strong> (رنگ‌های برند)، 
+    <strong>Complementary</strong> (رنگ‌های مکمل)، و <strong>Neutral</strong> (رنگ‌های خنثی). 
+    این رنگ‌ها در کل پروژه استفاده خواهند شد.
   </p>
 
   <h2>Main</h2>
@@ -219,12 +237,113 @@ small { font-size:15px; font-weight:400; }
         <span class="fade-text">کپی شد!</span>
       </span>
     </div>
+    <div class="color-box main-262626">
+      #262626
+      <span class="copy-icon" onclick="copyColor(this, '#262626')">
+        <span class="material-icons">content_copy</span>
+        <span class="fade-text">کپی شد!</span>
+      </span>
+    </div>
+    <div class="color-box main-FFFFFF">
+      #FFFFFF
+      <span class="copy-icon" onclick="copyColor(this, '#FFFFFF')">
+        <span class="material-icons">content_copy</span>
+        <span class="fade-text">کپی شد!</span>
+      </span>
+    </div>
+  </div>
+
+  <h2>Complementary</h2>
+  <div class="color-palette">
+    <div class="color-box complementary-EFF2FF">#EFF2FF
+      <span class="copy-icon" onclick="copyColor(this, '#EFF2FF')">
+        <span class="material-icons">content_copy</span>
+        <span class="fade-text">کپی شد!</span>
+      </span>
+    </div>
+    <div class="color-box complementary-DCE0F3">#DCE0F3
+      <span class="copy-icon" onclick="copyColor(this, '#DCE0F3')">
+        <span class="material-icons">content_copy</span>
+        <span class="fade-text">کپی شد!</span>
+      </span>
+    </div>
+    <div class="color-box complementary-95A2E2">#95A2E2
+      <span class="copy-icon" onclick="copyColor(this, '#95A2E2')">
+        <span class="material-icons">content_copy</span>
+        <span class="fade-text">کپی شد!</span>
+      </span>
+    </div>
+    <div class="color-box complementary-C7CEEE">#C7CEEE
+      <span class="copy-icon" onclick="copyColor(this, '#C7CEEE')">
+        <span class="material-icons">content_copy</span>
+        <span class="fade-text">کپی شد!</span>
+      </span>
+    </div>
+    <div class="color-box complementary-6376D6">#6376D6
+      <span class="copy-icon" onclick="copyColor(this, '#6376D6')">
+        <span class="material-icons">content_copy</span>
+        <span class="fade-text">کپی شد!</span>
+      </span>
+    </div>
+  </div>
+
+  <h2>Neutral</h2>
+  <div class="color-palette">
+    <div class="color-box neutral-FAFAFA">#FAFAFA
+      <span class="copy-icon" onclick="copyColor(this, '#FAFAFA')">
+        <span class="material-icons">content_copy</span>
+        <span class="fade-text">کپی شد!</span>
+      </span>
+    </div>
+    <div class="color-box neutral-E9E8E8">#E9E8E8
+      <span class="copy-icon" onclick="copyColor(this, '#E9E8E8')">
+        <span class="material-icons">content_copy</span>
+        <span class="fade-text">کپی شد!</span>
+      </span>
+    </div>
+    <div class="color-box neutral-DEDDDD">#DEDDDD
+      <span class="copy-icon" onclick="copyColor(this, '#DEDDDD')">
+        <span class="material-icons">content_copy</span>
+        <span class="fade-text">کپی شد!</span>
+      </span>
+    </div>
+    <div class="color-box neutral-C4C4C4">#C4C4C4
+      <span class="copy-icon" onclick="copyColor(this, '#C4C4C4')">
+        <span class="material-icons">content_copy</span>
+        <span class="fade-text">کپی شد!</span>
+      </span>
+    </div>
+    <div class="color-box neutral-ADADAD">#ADADAD
+      <span class="copy-icon" onclick="copyColor(this, '#ADADAD')">
+        <span class="material-icons">content_copy</span>
+        <span class="fade-text">کپی شد!</span>
+      </span>
+    </div>
+    <div class="color-box neutral-868686">#868686
+      <span class="copy-icon" onclick="copyColor(this, '#868686')">
+        <span class="material-icons">content_copy</span>
+        <span class="fade-text">کپی شد!</span>
+      </span>
+    </div>
+    <div class="color-box neutral-454545">#454545
+      <span class="copy-icon" onclick="copyColor(this, '#454545')">
+        <span class="material-icons">content_copy</span>
+        <span class="fade-text">کپی شد!</span>
+      </span>
+    </div>
+    <div class="color-box neutral-313131">#313131
+      <span class="copy-icon" onclick="copyColor(this, '#313131')">
+        <span class="material-icons">content_copy</span>
+        <span class="fade-text">کپی شد!</span>
+      </span>
+    </div>
   </div>
 </section>
 
 <!-- Buttons Section -->
 <section id="buttons">
   <h1>دکمه‌ها</h1>
+  <p class="section-description">سه نوع دکمه اصلی در سیستم وجود دارد: Primary، Secondary و Tertiary. استفاده درست از رنگ و حالت Hover/Active تجربه کاربری را بهبود می‌بخشد.</p>
   <button class="btn btn-primary">Primary</button>
   <button class="btn btn-secondary">Secondary</button>
   <button class="btn btn-tertiary">Tertiary</button>
@@ -233,6 +352,7 @@ small { font-size:15px; font-weight:400; }
 <!-- Inputs Section -->
 <section id="inputs">
   <h1>فرم‌ها</h1>
+  <p class="section-description">ورودی‌ها شامل حالت‌های پایه، خطا و غیرفعال هستند. استفاده از border و رنگ مناسب وضعیت کاربر را نشان می‌دهد.</p>
   <input type="text" class="input-field" placeholder="Input پایه">
   <input type="text" class="input-field error" placeholder="Input خطا">
   <input type="text" class="input-field" placeholder="Input غیرفعال" disabled>
@@ -244,41 +364,38 @@ small { font-size:15px; font-weight:400; }
   <p class="section-description">فونت اصلی دیزاین سیستم: Estedad. نمونه هدینگ‌ها و متن بدنه با وزن‌ها و سایزهای دقیق.</p>
 
   <div class="typography-samples">
-    <h1>H1 - Bold</h1>
-    <p>متن نمونه H1 با سایز 24px</p>
+    <h1 class="heading-sample">H1 - Bold</h1>
+    <p>متن نمونه H1 با سایز 23.61px</p>
 
-    <h2>H2 - Bold</h2>
-    <p>متن نمونه H2 با سایز 22px</p>
+    <h2 class="heading-sample">H2 - Bold</h2>
+    <p>متن نمونه H2 با سایز 22.13px</p>
 
-    <h3>H3 - Bold</h3>
-    <p>متن نمونه H3 با سایز 20px</p>
+    <h3 class="heading-sample">H3 - Bold</h3>
+    <p>متن نمونه H3 با سایز 20.74px</p>
 
-    <h4>H4 - Bold</h4>
-    <p>متن نمونه H4 با سایز 19px</p>
+    <h4 class="heading-sample">H4 - Bold</h4>
+    <p>متن نمونه H4 با سایز 19.44px</p>
 
-    <h5>H5 - Bold</h5>
-    <p>متن نمونه H5 با سایز 18px</p>
+    <h5 class="heading-sample">H5 - Bold</h5>
+    <p>متن نمونه H5 با سایز 18.22px</p>
 
-    <h6>H6 - Bold</h6>
-    <p>متن نمونه H6 با سایز 17px</p>
+    <h6 class="heading-sample">H6 - Bold</h6>
+    <p>متن نمونه H6 با سایز 17.07px</p>
 
-    <p>P - Regular</p>
+    <p class="body-sample">P - Regular</p>
     <p>متن نمونه P با سایز 16px</p>
 
-    <small>Small - Regular</small>
+    <small class="small-sample">Small - Regular</small>
     <p>متن نمونه Small با سایز 15px</p>
 
-    <span class="extra-small">Extra small</span>
-    <p>متن نمونه با سایز 14px</p>
+    <span class="extra-small-sample">Extra small</span>
+    <p>متن نمونه با سایز 14.05px</p>
   </div>
 </section>
 
 </div>
 
 <script>
-// ===========================
-// Copy Color Function
-// ===========================
 function copyColor(element, color) {
   const icon = element.querySelector('.material-icons');
   const fadeText = element.querySelector('.fade-text');
@@ -294,12 +411,11 @@ function copyColor(element, color) {
   });
 }
 
-// ===========================
-// Hamburger Menu Toggle
-// ===========================
 function toggleMenu() {
   const sidebar = document.getElementById('sidebar');
+  const overlay = document.getElementById('overlay');
   sidebar.classList.toggle('open');
+  overlay.style.display = sidebar.classList.contains('open') ? 'block' : 'none';
 }
 </script>
 
