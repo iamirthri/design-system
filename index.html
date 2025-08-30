@@ -16,7 +16,7 @@
     display: flex; 
   }
   a { text-decoration: none; color: inherit; cursor: pointer; }
-  section { padding: 40px 20px; } /* padding بیشتر برای نفس کشیدن */
+  section { padding: 40px 20px; }
   h1,h2,h3,h4,h5,h6,p,small { margin: 10px 0; }
 
   /* Sidebar */
@@ -32,7 +32,13 @@
     box-sizing: border-box; 
     overflow-y: auto; 
   }
-  .sidebar h2 { font-size: 18px; margin-top: 0; }
+  .sidebar h2 { 
+    font-size: 16px;  /* کوچک شد */
+    margin-top: 0;
+    white-space: nowrap; 
+    overflow: hidden;
+    text-overflow: ellipsis; 
+  }
   .sidebar a { display: block; padding: 12px 0; font-weight: 500; transition: 0.2s; }
   .sidebar a:hover { color: #304ACA; }
 
@@ -53,13 +59,13 @@
   .section-description { margin-bottom: 20px; font-size: 14px; color: #555; }
 
   /* Color palette */
-  .color-palette { display: flex; flex-wrap: wrap; gap: 20px; margin-top: 20px; } /* فاصله بیشتر بین رنگ‌ها */
+  .color-palette { display: flex; flex-wrap: wrap; gap: 20px; margin-top: 20px; }
   .color-box { 
     width: 140px; 
     height: 50px; 
     display: flex; 
     align-items: center; 
-    justify-content: space-between; 
+    justify-content: flex-start; /* تغییر برای فاصله آیکون */
     padding: 0 15px; 
     font-weight: bold; 
     border-radius: 6px; 
@@ -79,12 +85,10 @@
     font-size:12px; 
     font-family:'Estedad', sans-serif; 
     color:#fff; 
-    position: absolute; 
-    left: 50%; 
-    top: 50%; 
-    transform: translate(-50%, -50%); 
+    margin-left: 10px; /* فاصله ۱۰ پیکسل از آیکون */
     opacity:0; 
     transition:opacity 0.3s; 
+    display: inline-block;
   }
 
   /* Buttons */
@@ -271,4 +275,3 @@ function copyColor(element, color) {
 
 </body>
 </html>
-
